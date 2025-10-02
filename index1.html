@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khushi Sinha - Aspiring CS Developer Portfolio</title>
+    
+    <!-- Custom CSS Styles -->
+    <style>
+        /* Variables and Reset */
+        :root {
+            --kiit-blue: #1c1e40;
+            --kiit-accent: #2e7d32;
+            --kiit-accent-light: #4CAF50; /* Brighter green for hover/tags */
+            --bg-light: #f0f7f7; 
+            --text-dark: #1f2937;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            scroll-behavior: smooth;
+        }
+
+        /* Keyframes for Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes subtleBounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        /* Layout Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        
+        /* General Card Styles */
+        .card {
+            background-color: white;
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.15); 
+            border-radius: 1rem;
+            padding: 1.5rem;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            opacity: 0; /* Hidden initially for fade-in */
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        /* Delay animation for subsequent cards */
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.4s; }
+        .card:nth-child(4) { animation-delay: 0.6s; }
+
+        .card:hover {
+            transform: translateY(-4px); /* Increased lift on hover */
+            box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Header Specific Styles */
+        .header-card {
+            border-top: 4px solid var(--kiit-accent);
+            padding: 2.5rem;
+            animation: fadeIn 0.8s ease-out forwards; /* Ensures header fades in */
+        }
+
+        .profile-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        /* Profile Image Styles */
+        .profile-photo {
+            width: 6rem;
+            height: 6rem;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: 0 0 0 4px var(--kiit-accent-light), 0 0 15px 5px rgba(46, 125, 50, 0.4);
+            animation: subtleBounce 2s ease-in-out 0.8s 1; /* Bounce on load */
+        }
+        
+        .profile-initials {
+            /* This section is hidden since we are using the image now, but kept for clarity */
+            display: none; 
+        }
+
+        .profile-name {
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: var(--kiit-blue);
+            letter-spacing: -0.025em;
+        }
+
+        .profile-tagline {
+            font-size: 1.125rem;
+            font-weight: 500;
+            color: #4b5563;
+            margin-top: 0.25rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 0.75rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #6b7280;
+        }
+
+        .contact-info a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s ease-in-out, transform 0.2s;
+        }
+
+        .contact-info a:hover {
+            color: var(--kiit-accent-light);
+            transform: translateY(-1px); /* Little lift on link hover */
+        }
+
+        .contact-info svg {
+            width: 1rem;
+            height: 1rem;
+            margin-right: 0.375rem;
+        }
+
+        /* Main Content Grid */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            max-width: 960px;
+            margin: 2rem auto;
+        }
+
+        /* Section Headings */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--kiit-blue);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--kiit-accent); 
+            padding-bottom: 0.5rem;
+        }
+
+        /* Skills Tags */
+        .skill-category {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--kiit-blue);
+            border-left: 4px solid var(--kiit-accent-light);
+            padding-left: 0.5rem;
+            margin-top: 0.75rem;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .skill-tag {
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            border-radius: 9999px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, background-color 0.3s;
+        }
+        
+        .skill-tag:hover {
+            transform: scale(1.05); /* Zoom in on hover */
+        }
+
+        .tag-core {
+            background-color: var(--kiit-blue);
+            color: white;
+        }
+        
+        .tag-basic {
+            background-color: #d1e7d8;
+            color: var(--kiit-accent);
+        }
+        .tag-basic:hover {
+            background-color: #bbd3c3; /* Slightly darker on hover */
+        }
+
+        /* Education */
+        .education-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
+        }
+        
+        .education-degree {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .education-institution {
+            color: var(--kiit-accent);
+            font-weight: 500;
+        }
+
+        .education-year {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: white;
+            background-color: var(--kiit-accent-light);
+            padding: 0.125rem 0.75rem;
+            border-radius: 9999px;
+            white-space: nowrap;
+        }
+
+        /* Projects CTA */
+        .cta-card {
+            background-color: var(--kiit-accent);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            animation-delay: 0.8s !important; /* Last element fades in last */
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: white;
+            color: var(--kiit-accent);
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, color 0.3s;
+            text-decoration: none;
+        }
+
+        .cta-button:hover {
+            background-color: var(--kiit-blue);
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            max-width: 960px;
+            margin: 3rem auto 0;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e5e7eb;
+            text-align: center;
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (min-width: 640px) { /* sm breakpoint */
+            .container {
+                padding: 2rem;
+            }
+            .profile-header {
+                flex-direction: row;
+                align-items: flex-start;
+            }
+        }
+
+        @media (min-width: 768px) { /* md breakpoint */
+            .container {
+                padding: 3rem;
+            }
+            .main-grid {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+    </style>
+    
+    <!-- Using Google Font for Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Main Container -->
+    <div class="container">
+        <header class="max-w-4xl mx-auto mb-8">
+            <div class="card header-card">
+                
+                <!-- Profile Header -->
+                <div class="profile-header">
+                    <!-- Khushi Sinha Profile Photo - UPDATED SRC TO SIMPLE FILENAME -->
+                    <img 
+                        src="khushi.jpg" 
+                        alt="Khushi Sinha - Profile Photo" 
+                        class="profile-photo"
+                        onerror="this.onerror=null;this.src='https://placehold.co/96x96/1c1e40/ffffff?text=KS'"
+                    >
+                    
+                    <div>
+                        <h1 class="profile-name">Khushi Sinha</h1>
+                        <p class="profile-tagline">2nd Year B.Tech Computer Science Student | Aspiring Developer</p>
+                        
+                        <!-- Contact Info -->
+                        <div class="contact-info">
+                            <!-- Email Icon (Inline SVG) -->
+                            <a href="mailto:2405127@kiit.ac.in" title="Email Khushi Sinha">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-2 4v7a2 2 0 01-2 2H5a2 2 0 01-2-2v-7"></path></svg>
+                                2405127@kiit.ac.in
+                            </a>
+                            <!-- LinkedIn/GitHub Links -->
+                            <a href="https://www.linkedin.com/in/khushi-sinha-207a4b322/" title="Link to your LinkedIn Profile" target="_blank" rel="noopener noreferrer">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                LinkedIn
+                            </a>
+                            <a href="#" title="Link to your GitHub Profile" target="_blank" rel="noopener noreferrer">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4m-4 4l-4 4m-4-4l-4 4m-4-4l-4 4"></path></svg>
+                                GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Grid -->
+        <main class="main-grid">
+
+            <!-- Column 1 & 2: About and Education -->
+            <div class="space-y-8 md:col-span-2">
+                
+                <!-- About Section -->
+                <section id="about" class="card">
+                    <h2 class="section-title">About Me</h2>
+                    <p class="text-gray-700">
+                        I am Khushi Sinha, a dedicated 2nd-year B.Tech Computer Science student at **KIIT University, Bhubaneswar**. I am passionate about understanding the fundamental concepts of computing, particularly **Data Structures and Algorithms (DSA)** and **Object-Oriented Programming (OOP)**. While currently a beginner focused on mastering the basics, I am eager to transition my academic knowledge into practical, impactful software solutions. I look forward to building my first portfolio-worthy projects soon!
+                    </p>
+                </section>
+
+                <!-- Education Section -->
+                <section id="education" class="card">
+                    <h2 class="section-title">Education</h2>
+                    <div class="space-y-3">
+                        <div class="education-item">
+                            <div>
+                                <h3 class="education-degree">B.Tech in Computer Science</h3>
+                                <p class="education-institution">KIIT University, Bhubaneswar</p>
+                            </div>
+                            <span class="education-year">2024 - 2028 (Expected)</span>
+                        </div>
+                        <p style="font-size: 0.875rem; color: #4b5563;">
+                            **Relevant Coursework:** Data Structures & Algorithms, Object-Oriented Programming, Discrete Mathematics, Introduction to Web Technologies.
+                        </p>
+                    </div>
+                </section>
+                
+            </div>
+
+            <!-- Column 3: Skills and Projects CTA -->
+            <div class="space-y-8">
+                
+                <!-- Skills Section -->
+                <section id="skills" class="card">
+                    <h2 class="section-title">Technical Skills</h2>
+                    <div style="margin-bottom: 0.75rem;">
+                        
+                        <!-- Skill Category: Core Languages -->
+                        <h3 class="skill-category">Core Programming</h3>
+                        <div class="skill-list">
+                            <span class="skill-tag tag-core">C</span>
+                            <span class="skill-tag tag-core">C++</span>
+                            <span class="skill-tag tag-core">JAVA</span>
+                        </div>
+
+                        <!-- Skill Category: Fundamentals -->
+                        <h3 class="skill-category">Fundamentals</h3>
+                        <div class="skill-list">
+                            <span class="skill-tag tag-basic">DSA (Foundational)</span>
+                            <span class="skill-tag tag-basic">OOP Concepts</span>
+                            <span class="skill-tag tag-basic">SQL (Basic)</span>
+                        </div>
+
+                        <!-- Skill Category: Tools & Web -->
+                        <h3 class="skill-category">Tools & Web Basics</h3>
+                        <div class="skill-list">
+                            <span class="skill-tag tag-basic">Git</span>
+                            <span class="skill-tag tag-basic">GitHub</span>
+                            <span class="skill-tag tag-basic">HTML & CSS</span>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Projects Call to Action -->
+                <section id="projects-cta" class="cta-card">
+                    <h2 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 0.75rem;">Next Steps: Projects</h2>
+                    <p style="font-size: 0.875rem; font-weight: 300; margin-bottom: 1rem;">
+                        I am currently focusing on building my first dedicated computer science projects. This section will be updated soon!
+                    </p>
+                    <a href="#" class="cta-button" target="_blank" rel="noopener noreferrer">
+                        Follow My GitHub Progress &rarr;
+                    </a>
+                </section>
+            </div>
+
+        </main>
+        
+        <!-- Footer -->
+        <footer>
+            <p>&copy; <span id="current-year">2024</span> Khushi Sinha. Built with HTML, CSS, and JavaScript.</p>
+        </footer>
+
+    </div>
+
+    <!-- Simple JavaScript to set the dynamic year in the footer -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const yearElement = document.getElementById('current-year');
+            if (yearElement) {
+                yearElement.textContent = new Date().getFullYear();
+            }
+        });
+    </script>
+
+</body>
+</html>
